@@ -28,6 +28,7 @@ refreshList();
 
 $("#searchBtn").on("click", function () {
 	let searchtext = $('#searchBox').val();
+	$('#searchBox').val("");
 	$.ajax({
 		url: "/searchtodo",
 		type: 'get',
@@ -49,13 +50,14 @@ $("#searchBtn").on("click", function () {
 
 $("#save").on("click", function () {
 	let savetext = $('#savebox').val();
+	$('#savebox').val("");
 	$.ajax({
 		url: "/savetodo",
 		type: 'post',
 		dataType: 'json',
 		data: JSON.stringify({
 			message: savetext,
-			completed: false,
+			completed: false, 
 		}),
 		success: function (data) {
 			refreshList();
@@ -68,7 +70,7 @@ $("#save").on("click", function () {
 
 $(document).on('click','.delete', function(e){
 	$.ajax({
-		url: "/todos/" + e.target.id,
+		url: "/todos/" + e.target.id, 
 		type: 'delete',
 		success: function (data) {
 			refreshList();
@@ -93,9 +95,6 @@ $(document).on('change', '.checkbox', function(e){
 		success: function(data) {
 			refreshList();
 		},
-		// error: function() {
-		// 	alert('$$$$');
-		// }
 	})
 })
 
